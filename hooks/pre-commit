@@ -1,0 +1,30 @@
+# pre-commit file that scans commited files with Bandit.
+# Bandit output is stored in a csv file security_report.csv
+
+#!/bin/bash
+
+# Output to CSV file.
+OUTPUT_FILE="security_report.csv"
+
+# Find all Python Files.
+PYTHON_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+
+# Check for Scannable Files.
+if [ -n "$PYTHON_FILES" ]; then
+    echo "Running security scan on Python Files..."
+
+    # Run Bandit on the staged files and save output to CSV
+    bandit -r $PYTHON_FILES -f csv -o $OUTPUT_FILE
+
+    # Check Bandit Status.
+    if [ $? -ne 0 ]; then
+        echo "Security scan completed with issues. Review '$OUTPUT_FILE'."
+
+        # Don't Commit if there are issues
+        exit 1
+    else
+        echo "Security scan completed successfully."
+    fi
+else
+    echo "No Python files were staged for commit."
+fi
