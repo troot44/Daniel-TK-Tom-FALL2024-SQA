@@ -9,7 +9,7 @@ import pandas as pd
 import time 
 import datetime 
 
-print(
+print("This is a minor change to test if GitHub actions is working.")
 
 def giveTimeStamp():
   tsObj = time.time()
