@@ -13,3 +13,15 @@ us about creating a pre-commit file. With these practices, we made
 a pre-commit file that uses Bandit to analyze any files that will 
 be commited, any problems with the files will be recorded in a file
 called security_report.csv. 
+
+
+Step 4b: Fuzzing
+
+
+Step 4c: Forensics
+
+
+Step 4d: CI
+
+For this step, we essentially did the exact same thing we did in 
+Workshop 9 with the Codacy Analysis tool. No extra steps were taken.
