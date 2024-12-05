@@ -145,20 +145,44 @@ def deleteRepos():
     for x_ in repos:
         deleteRepo( x_, 'ML_LIBRARY_THRESHOLD' )
 
-if __name__=='__main__':
+if __name__ == '__main__':
+    logObj = myLogger.giveMeLoggingObject()  # Ensure logger is initialized
     logObj.info("Application started.")
     try:
-        # repos_df = pd.read_csv('PARTIAL_REMAINING_GITHUB.csv')
-        # list_    = repos_df['URL'].tolist()
-        # list_    = np.unique(list_)
-        # # print('Repos to download:', len(list_)) 
-        # ## need to create chunks as too many repos 
-        # chunked_list = list(makeChunks(list_, 100))  ### list of lists, at each batch download 100 repos 
-        # cloneRepos(chunked_list)
+        # Example 1: Call `deleteRepos` to delete repositories
+        logObj.info("Starting repository deletion process...")
+        deleteRepos()
+
+        # Example 2: Test `makeChunks` with a sample list
+        logObj.info("Testing makeChunks method...")
+        sample_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        chunked_list = list(makeChunks(sample_list, 3))
+        logObj.info(f"Chunks created: {chunked_list}")
+
+        # Example 3: Test repository cloning with a placeholder repo
+        logObj.info("Testing cloneRepo method...")
+        test_repo_url = "https://github.com/example/example-repo.git"
+        cloneRepo(test_repo_url, "/tmp/test-repo")
+
+        # Example 4: Count Python files in a directory
+        logObj.info("Testing getPythonCount method...")
+        test_dir = "/tmp/test-repo"
+        python_file_count = getPythonCount(test_dir)
+        logObj.info(f"Number of Python files in directory '{test_dir}': {python_file_count}")
+
+        # Example 5: Test the full ML stats flow
+        logObj.info("Testing getMLStats method...")
+        di_ = '/Users/arahman/FSE2021_ML_REPOS/GITHUB_REPOS/'
+        stats = getMLStats(di_)
+        logObj.info(f"ML stats gathered: {stats}")
+        df_ = pd.DataFrame(stats)
+        df_.to_csv('LIB_BREAKDOWN_GITHUB_BATCH2.csv', header=['REPO', 'LIB_COUNT'], index=False, encoding='utf-8')
+
         logObj.info("Execution completed successfully.")
     except Exception as e:
         logObj.error(f"Application encountered an unexpected error: {str(e)}")
-    logObj.info("Application ended.")
+    finally:
+        logObj.info("Application ended.")
 
 
 
