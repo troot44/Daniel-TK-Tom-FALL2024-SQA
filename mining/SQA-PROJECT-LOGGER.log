@@ -1,3 +1,7 @@
 2024-12-05 15:45:18,879:Application started.
 2024-12-05 15:45:18,879:Execution completed successfully.
 2024-12-05 15:45:18,880:Application ended.
+2024-12-05 16:08:45,373:Application started.
+2024-12-05 16:08:45,374:Starting repository deletion process...
+2024-12-05 16:08:45,379:Application encountered an unexpected error: [Errno 2] No such file or directory: 'DELETE_CANDIDATES_GITHUB_V2.csv'
+2024-12-05 16:08:45,380:Application ended.
