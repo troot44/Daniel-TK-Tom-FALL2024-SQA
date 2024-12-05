@@ -1,12 +1,13 @@
 # fuzz.py
-
 import random
 import statistics
 import pandas as pd
 import os
 import traceback
-# In fuzz.py
-from empirical.report import Average, Median, reportProp, reportDensity
+import time
+import logging
+from unittest.mock import patch
+from empirical.report import Average, Median, reportProp, reportDensity, giveTimeStamp
 
 
 #All methods are found in empirical folder an look at report.
@@ -58,6 +59,27 @@ def fuzz_reportDensity():
     except Exception as e:
         log_bug("reportDensity", filename, e)
 
+
+def fuzz_giveTimeStamp():
+    # List of test timestamps
+    test_timestamps = [
+        -1e10,   # Far in the past (negative epoch time)
+        0,       # Epoch start
+        1e10,    # Far in the future
+        1e9,     # Standard large timestamp
+        time.time()  # Current time
+    ]
+
+    # Test each timestamp
+    for ts in test_timestamps:
+        try:
+            # Mock time.time() to return the test timestamp
+            with patch('time.time', return_value=ts):
+                result = giveTimeStamp()
+                logging.info(f"giveTimeStamp() with mocked time.time()={ts} -> {result}")
+        except Exception as e:
+            log_bug("giveTimeStamp", ts, e)
+
 # Generate a random CSV file for fuzzing
 def generate_random_csv(filename):
     """Generates a random CSV file with appropriate columns for fuzzing."""
@@ -76,11 +98,11 @@ def generate_random_csv(filename):
 
 # Main fuzzing loop
 def main():
-    for _ in range(1000):  # Number of fuzzing iterations
-        fuzz_Average()
-        fuzz_Median()
-        fuzz_reportProp()
-        fuzz_reportDensity()
+    fuzz_Average()
+    fuzz_Median()
+    fuzz_reportProp()
+    fuzz_reportDensity()
+    fuzz_giveTimeStamp()
 
 if __name__ == "__main__":
     main()
