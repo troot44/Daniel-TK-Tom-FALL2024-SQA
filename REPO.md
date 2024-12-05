@@ -29,6 +29,8 @@ so that the logger would record the method logs.
 This step was only difficult because of Bandit (Static Analysis) and the fact that the file we edited runs into issues with dependencies. The logging implementation
 works but will not run through each of the methods as it encounters a dependency error in the first method it encounters.
 
+ATTENTION: THE LOGGING FILE IS STORED IN THE MINING FOLDER ALONG WITH THE FILE THAT IS BEING LOGGED.
+
 
 Step 4d: CI
 
