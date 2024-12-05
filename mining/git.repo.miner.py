@@ -17,41 +17,66 @@ from xml.parsers.expat import ExpatError
 import time 
 import  datetime 
 import os 
+import myLogger
 
+logObj = myLogger.giveMeLoggingObject()
+
+# Added logging functionality.
 def deleteRepo(dirName, type_):
-    print(':::' + type_ + ':::Deleting ', dirName)
+    logObj.info(f"Attempting to delete repository: {dirName} due to {type_}")
     try:
         if os.path.exists(dirName):
             shutil.rmtree(dirName)
-    except OSError:
-        print('Failed deleting, will try manually')        
+            logObj.info(f"Successfully deleted repository: {dirName}")
+    except OSError as e:
+        logObj.error(f"Failed to delete repository {dirName} manually. Error: {str(e)}")
 
-
+# Added logging functionality.
 def makeChunks(the_list, size_):
+    logObj.info(f"Splitting a list of size {len(the_list)} into chunks of size {size_}")
+    chunk_count = 0
     for i in range(0, len(the_list), size_):
+        chunk_count += 1
         yield the_list[i:i+size_]
+    logObj.info(f"Successfully split the list into {chunk_count} chunks.")
 
+# Added logging functionality.
 def cloneRepo(repo_name, target_dir):
     cmd_ = "git clone " + repo_name + " " + target_dir 
+    logObj.info(f"Cloning repository: {repo_name} into directory: {target_dir}")
     try:
-       subprocess.check_output(['bash','-c', cmd_])    
-    except subprocess.CalledProcessError:
-       print('Skipping this repo ... trouble cloning repo:', repo_name )
+       subprocess.check_output(['bash','-c', cmd_])
+       logObj.info(f"Successfully cloned repository: {repo_name}")
+    except subprocess.CalledProcessError as e:
+       logObj.error(f"Error cloning repository {repo_name}. Error: {str(e)}")
 
+# Edited method to include error handling for logging purposes.
 def dumpContentIntoFile(strP, fileP):
-    fileToWrite = open( fileP, 'w')
-    fileToWrite.write(strP )
-    fileToWrite.close()
-    return str(os.stat(fileP).st_size)
+    logObj.info(f"Writing data into file: {fileP}")
+    try:
+        with open(fileP, 'w') as fileToWrite:
+            fileToWrite.write(strP)
+        file_size = os.stat(fileP).st_size
+        logObj.info(f"Successfully wrote to file: {fileP} (Size: {file_size} bytes)")
+        return str(file_size)
+    except Exception as e:
+        logObj.error(f"Failed to write to file: {fileP}. Error: {str(e)}")
+        return 0
 
-def getPythonCount(path2dir): 
+# Edited method to include error handling for logging purposes.
+def getPythonCount(path2dir):
+    logObj.info(f"Counting Python files in directory: {path2dir}")
     usageCount = 0
-    for root_, dirnames, filenames in os.walk(path2dir):
-        for file_ in filenames:
-            full_path_file = os.path.join(root_, file_) 
-            if (file_.endswith('py') ):
-                usageCount +=  1 
-    return usageCount                         
+    try:
+        for root_, dirnames, filenames in os.walk(path2dir):
+            for file_ in filenames:
+                full_path_file = os.path.join(root_, file_) 
+                if (file_.endswith('py') ):
+                    usageCount +=  1 
+        logObj.info(f"Found {usageCount} Python files in directory: {path2dir}")
+    except Exception as e:
+        logObj.error(f"Error counting Python files in directory: {path2dir}. Error: {str(e)}")
+    return usageCount
 
 
 def cloneRepos(repo_list): 
@@ -121,13 +146,19 @@ def deleteRepos():
         deleteRepo( x_, 'ML_LIBRARY_THRESHOLD' )
 
 if __name__=='__main__':
-    # repos_df = pd.read_csv('PARTIAL_REMAINING_GITHUB.csv')
-    # list_    = repos_df['URL'].tolist()
-    # list_    = np.unique(list_)
-    # # print('Repos to download:', len(list_)) 
-    # ## need to create chunks as too many repos 
-    # chunked_list = list(makeChunks(list_, 100))  ### list of lists, at each batch download 100 repos 
-    # cloneRepos(chunked_list)
+    logObj.info("Application started.")
+    try:
+        # repos_df = pd.read_csv('PARTIAL_REMAINING_GITHUB.csv')
+        # list_    = repos_df['URL'].tolist()
+        # list_    = np.unique(list_)
+        # # print('Repos to download:', len(list_)) 
+        # ## need to create chunks as too many repos 
+        # chunked_list = list(makeChunks(list_, 100))  ### list of lists, at each batch download 100 repos 
+        # cloneRepos(chunked_list)
+        logObj.info("Execution completed successfully.")
+    except Exception as e:
+        logObj.error(f"Application encountered an unexpected error: {str(e)}")
+    logObj.info("Application ended.")
 
 
 
