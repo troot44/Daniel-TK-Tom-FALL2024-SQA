@@ -6,11 +6,10 @@ https://github.com/troot44/Daniel-TK-Tom-FALL2024-SQA
 
 
 Step 4a: Hooks
-For this step, we referenced Workshops 6 and 8.
 
-W6 taught us how to use Bandit for Static Analysis and W8 taught us about creating a pre-commit file. With these practices, we made
-a pre-commit file that uses Bandit to analyze any files that will be commited, any problems with the files will be recorded in a file
-called security_report.csv. 
+For this step, we referenced Workshops 6 and 8. W6 taught us how to use Bandit for Static Analysis and W8 taught us about creating a 
+pre-commit file. With these practices, we made a pre-commit file that uses Bandit to analyze any files that will be commited, any problems 
+with the files will be recorded in a file called security_report.csv. 
 
 This was the first step that we took, and we learned that including static analysis can make it difficult at times to commit new files.
 Considering that the contents of the repo we were given dont really matter for the project, a lot of the files are vulnerable according 
@@ -18,6 +17,7 @@ to Bandit and had to be worked arounf for committing new uploads.
 
 
 Step 4b: Fuzzing
+
 
 
 Step 4c: Forensics
