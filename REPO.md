@@ -20,6 +20,20 @@ to Bandit and had to be worked arounf for committing new uploads.
 Step 4b: Fuzzing
 ...
 
+For this step we I looked at how the different functions worked and created a random csv generator to send to the different methods. The methods we chose was Average(),Median() reportProp() reportDensity(), giveTimeStamp(). 
+
+This step was challenging primarily in finding weaknesses in the methods. While the methods were robust in most cases, crafting specific inputs to "break" them required extra creativity and thorough analysis. Creating our own fuzzing inputs rather than relying on built-in Python fuzzing functions gave us greater control over the test scenarios.
+
+Custom generators allowed us to target specific edge cases and scenarios, resulting in a more comprehensive test.
+Error Handling:
+
+Well-handled exceptions in the methods, such as for empty lists or invalid CSV files, ensured stability.
+Mocking:
+
+Mocking external dependencies like time.time helped us simulate a broader range of scenarios for giveTimeStamp().
+
+
+
 
 ...
 Step 4c: Forensics
