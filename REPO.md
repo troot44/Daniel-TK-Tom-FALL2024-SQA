@@ -21,11 +21,15 @@ to Bandit and had to be worked arounf for committing new uploads.
 Step 4b: Fuzzing
 ...
 
-For the fuzzing step, we used a black box fuzzing method to feed randomly generated csv files to five different methods in the report.py file.
-When bugs are found they are reported to a log file fuzzing_results.log. The execution of this file is also included in the output of the Codacy CI
-analysis implemented in step 4d.
+For this step we I looked at how the different functions worked and created a random csv generator to send to the different methods. The methods we chose was Average(),Median() reportProp() reportDensity(), giveTimeStamp().
 
-This was a relatively straightforward step.
+This step was challenging primarily in finding weaknesses in the methods. While the methods were robust in most cases, crafting specific inputs to "break" them required extra creativity and thorough analysis. Creating our own fuzzing inputs rather than relying on built-in Python fuzzing functions gave us greater control over the test scenarios.
+
+Custom generators allowed us to target specific edge cases and scenarios, resulting in a more comprehensive test. Error Handling:
+
+Well-handled exceptions in the methods, such as for empty lists or invalid CSV files, ensured stability. Mocking:
+
+Mocking external dependencies like time.time helped us simulate a broader range of scenarios for giveTimeStamp().
 
 
 ...
