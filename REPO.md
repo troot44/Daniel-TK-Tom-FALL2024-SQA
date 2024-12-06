@@ -16,9 +16,16 @@ This was the first step that we took, and we learned that including static analy
 Considering that the contents of the repo we were given dont really matter for the project, a lot of the files are vulnerable according 
 to Bandit and had to be worked arounf for committing new uploads.
 
+
 ...
 Step 4b: Fuzzing
 ...
+
+For the fuzzing step, we used a black box fuzzing method to feed randomly generated csv files to five different methods in the report.py file.
+When bugs are found they are reported to a log file fuzzing_results.log. The execution of this file is also included in the output of the Codacy CI
+analysis implemented in step 4d.
+
+This was a relatively straightforward step.
 
 
 ...
