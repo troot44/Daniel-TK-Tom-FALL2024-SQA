@@ -5,3 +5,7 @@
 2024-12-05 16:08:45,374:Starting repository deletion process...
 2024-12-05 16:08:45,379:Application encountered an unexpected error: [Errno 2] No such file or directory: 'DELETE_CANDIDATES_GITHUB_V2.csv'
 2024-12-05 16:08:45,380:Application ended.
+2024-12-05 22:32:15,891:Application started.
+2024-12-05 22:32:15,892:Starting repository deletion process...
+2024-12-05 22:32:15,897:Application encountered an unexpected error: [Errno 2] No such file or directory: 'DELETE_CANDIDATES_GITHUB_V2.csv'
+2024-12-05 22:32:15,898:Application ended.

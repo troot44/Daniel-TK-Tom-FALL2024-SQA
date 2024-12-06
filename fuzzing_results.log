@@ -1,0 +1,24 @@
+Bug in reportProp
+Inputs: test_fuzz_reportProp.csv
+Exception: Traceback (most recent call last):
+  File "fuzz.py", line 46, in fuzz_reportProp
+    reportProp(filename)
+  File "/mnt/c/Users/tom44/Desktop/Daniel-TK-Tom-FALL2024-SQA/MLForensics/MLForensics-farzana/empirical/report.py", line 35, in reportProp
+    average_prop_metric = Average(prop_val_list)
+  File "/mnt/c/Users/tom44/Desktop/Daniel-TK-Tom-FALL2024-SQA/MLForensics/MLForensics-farzana/empirical/report.py", line 20, in Average
+    return sum(Mylist) / len(Mylist)
+ZeroDivisionError: division by zero
+
+--------------------------------------------------------------------------------
+Bug in reportProp
+Inputs: test_fuzz_reportProp.csv
+Exception: Traceback (most recent call last):
+  File "fuzz.py", line 46, in fuzz_reportProp
+    reportProp(filename)
+  File "/mnt/c/Users/tom44/Desktop/Daniel-TK-Tom-FALL2024-SQA/MLForensics/MLForensics-farzana/empirical/report.py", line 35, in reportProp
+    average_prop_metric = Average(prop_val_list)
+  File "/mnt/c/Users/tom44/Desktop/Daniel-TK-Tom-FALL2024-SQA/MLForensics/MLForensics-farzana/empirical/report.py", line 20, in Average
+    return sum(Mylist) / len(Mylist)
+ZeroDivisionError: division by zero
+
+--------------------------------------------------------------------------------
